@@ -1,0 +1,29 @@
+# Line-ending policy.
+#
+# CRITICAL: the shell scripts here are executed by BusyBox /bin/sh on the
+# camera. A CRLF line ending makes them fail with "\r: not found".
+# They MUST stay LF in the working tree on every platform.
+
+* text=auto eol=lf
+
+# Shell scripts - must be LF, always, on every platform
+*.sh      text eol=lf
+S70custom text eol=lf
+initrun.sh text eol=lf
+
+# Config/text for the camera - LF, and these are format-sensitive
+*.txt     text eol=lf
+*.json    text eol=lf
+*.yaml    text eol=lf
+*.yml     text eol=lf
+*.md      text eol=lf
+
+# Firmware / binary artifacts must never be mangled
+*.bin     binary
+*.jffs2   binary
+*.data    binary
+*.png     binary
+*.jpg     binary
+
+# Flash dumps may be large; keep diffs sane
+*.bin     -diff
