@@ -1,0 +1,20 @@
+#!/bin/sh
+# /etc/init.d/S70custom
+# Runs as ROOT at boot. Loads custom.sh from the SD card.
+# This is the ONLY change needed in flash for the Geeni/Merkury hi_sfc cameras
+# whose bootloader lacks the `run` command (Merkury720 SD hack cannot work).
+#
+# INSTALL: place in the jffs2 app partition at /etc/init.d/S70custom, chmod +x
+
+cat /proc/mounts > /tmp/hack
+
+(
+while true; do
+ sleep 10
+ if [ -e /mnt/mmc01/custom.sh ]; then
+  cp /mnt/mmc01/custom.sh /tmp/custom.sh
+  chmod +x /tmp/custom.sh
+  /tmp/custom.sh
+ fi
+done
+) &

@@ -1,0 +1,11 @@
+# flash dumps - large, and contain YOUR device secrets
+*.bin
+*.jffs2
+flash*.bin
+
+# extracted firmware
+_extracted/
+
+# device backups - contain authkey/deviceid/shadow
+camera-backup/
+*.data
